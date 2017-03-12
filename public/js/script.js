@@ -59,6 +59,8 @@ $(function(){
     peer_id = connection.peer;
     conn.on('data', handleMessage);
 
+    call();
+
     $('#peer_id').addClass('hidden').val(peer_id);
     $('#connected_peer_container').removeClass('hidden');
     $('#connected_peer').text(connection.metadata.username);
@@ -95,7 +97,7 @@ $(function(){
 
   $('#send-message').click(sendMessage);
 
-  $('#call').click(function(){
+  function call() {
     console.log('now calling: ' + peer_id);
     console.log(peer);
     var call = peer.call(peer_id, window.localStream);
@@ -103,7 +105,7 @@ $(function(){
       window.peer_stream = stream;
       onReceiveStream(stream, 'peer-camera');
     });
-  });
+  }
 
   peer.on('call', function(call){
     onReceiveCall(call);
