@@ -43,7 +43,7 @@ $(function(){
   $('#login').click(function() {
     name = $('#name').val();
 
-    $.get('http://localhost:9000/randomUser', function(id) {
+    $.get('http://localhost:9000/randomUser', function(peer_id) {
       conn = peer.connect(peer_id, {metadata: {
         'username': name
       }});
