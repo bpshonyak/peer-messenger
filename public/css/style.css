@@ -3,30 +3,39 @@ body {
 }
 
 #wrapper {
-  width: 900px;
+  width: 100vw;
   margin: 0 auto;
+  display: flex;
+  flex-direction: row;
 }
 
-h1 {
+h2 {
   padding-left: 30px;
   background-color: #E6E6E6;
 }
 
-#messenger-wrapper {
-  width: 400px;
-  float: left;
+#messenger-wrapper .container {
+  height: 100%;
+}
+
+#chat {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 90vh;
+  overflow-y: scroll;
 }
 
 .hidden {
-  display: none;
+  display: none !important;
 }
 
 input[type=text] {
   margin-bottom: 10px;
 }
 
-.camera {
-  text-align: center;
+.cameras {
+  width: 100%
 }
 
 #connect {
@@ -44,7 +53,7 @@ ul#messages {
 }
 
 #message {
-  width: 330px;
+
 }
 
 span.from {
@@ -61,15 +70,23 @@ ul#messages li {
 }
 
 #my-camera {
-  float: left;
-  width: 200px;
-  height: 200px;
+  
 }
 
 #peer-camera {
-  float: left;
-  width: 300px;
-  height: 350px;
+  width: 100%;
+}
+
+#my-camera > video {
+  width: 100%;
+  height: 30vh;
+  min-height: 200px;
+}
+
+#peer-camera > video {
+  width: 100%;
+  height: 70vh;
+  min-height: 400px;
 }
 
 @media screen and (max-width: 800px){
@@ -79,9 +96,5 @@ ul#messages li {
 
   #wrapper > div {
     width: 100%;
-  }
-
-  #peer-camera, #my-camera {
-    float: none;
   }
 }
