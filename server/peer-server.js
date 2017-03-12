@@ -1,9 +1,13 @@
 var _ = require('lodash');
+var cors = require('cors');
 var express = require('express');
 var app = express();
 var ExpressPeerServer = require('peer').ExpressPeerServer;
 
 var activeUsers = [];
+
+
+app.use(cors());
 
 app.get('/randomUser', function(req, res, next) {
     res.send(_.sample(activeUsers)); 

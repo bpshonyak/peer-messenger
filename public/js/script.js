@@ -40,15 +40,15 @@ $(function(){
     window.peer_stream = stream;
   }
 
-  $('#login').click(function(){
+  $('#login').click(function() {
     name = $('#name').val();
-    peer_id = $('#peer_id').val();
-    if(peer_id){
+
+    $.get('http://localhost:9000/randomUser', function(id) {
       conn = peer.connect(peer_id, {metadata: {
         'username': name
       }});
       conn.on('data', handleMessage);
-    }
+    });
 
     $('#chat').removeClass('hidden');
     $('#connect').addClass('hidden');
