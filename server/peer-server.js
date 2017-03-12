@@ -1,7 +1,23 @@
-var PeerServer = require('peer').PeerServer;
-var server = PeerServer({port: 9000, path: '/peerjs'});
+var _ = require('lodash');
+var express = require('express');
+var app = express();
+var ExpressPeerServer = require('peer').ExpressPeerServer;
 
 var activeUsers = [];
+
+app.get('/randomUser', function(req, res, next) {
+    res.send(_.sample(activeUsers)); 
+});
+
+var server = app.listen(9000);
+
+var options = {
+    debug: false,
+    proxied: true
+}
+
+var peerServer = ExpressPeerServer(server, options)
+app.use('/peerjs', peerServer);
 
 function addUser(id) {
     activeUsers.push(id);
@@ -12,12 +28,12 @@ function removeUser(id) {
     activeUsers.splice(userIdIndex, 1);
 }
 
-server.on('connection', function(id) { 
+peerServer.on('connection', function(id) { 
     console.log('Joining: ', id);
     addUser(id);
 });
 
-server.on('disconnect', function(id) {
+peerServer.on('disconnect', function(id) {
     console.log('Leaving: ', id);
     removeUser(id);
  });
